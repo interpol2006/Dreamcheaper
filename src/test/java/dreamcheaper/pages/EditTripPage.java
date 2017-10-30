@@ -3,102 +3,148 @@ package dreamcheaper.pages;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import javax.validation.constraints.AssertFalse;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.server.handler.interactions.MouseMoveToLocation;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl("http://stage1.dreamcheaper.review/tower/login")
+@DefaultUrl("http://stage2.dreamcheaper.review/tower/login")
 public class EditTripPage extends PageObject {
 
 	@FindBy(xpath="//div/input[@placeholder='Username']")
-	WebElement usernameField ;
+	public
+	WebElementFacade usernameField ;
 	
 	@FindBy(xpath="//div/input[@placeholder='Password']")
-	WebElement passwordField ;
+	WebElementFacade passwordField ;
 	
 	@FindBy(xpath="//div/button[@type='submit']")
-	WebElement loginBtn ;
+	WebElementFacade loginBtn ;
 	
 	@FindBy(id="trip_id")
-	WebElement tripidField ;
+	WebElementFacade tripidField ;
 	
 	@FindBy(xpath="//div[@class='form-group form-group-sm']/button[@type='submit']")
-	WebElement searchBtn ;
+	WebElementFacade searchBtn ;
 	
 	@FindBy(id="edit_trip_offer_price_currency")
-	WebElement dc_purchase_price_currency_field ;
+	WebElementFacade dc_purchase_price_currency_field ;
 	
 	@FindBy(xpath="//div/table[@id='trips-grid']/tbody/tr[1]")
-	WebElement tripField ;
+	WebElementFacade tripField ;
 	
 	@FindBy(xpath="//div/ul[@role='tablist']/li/a/span[text()='Booking No. 1']")
-	WebElement bookingNoField ;
+	WebElementFacade bookingNoField ;
 	
 	@FindBy(xpath="//div[@id='uniform-cKfKFfaO0']/span[1]")
-	WebElement radionbtnIcancel;
+	WebElementFacade radionbtnIcancel;
 	
 	@FindBy(xpath="//div[@class='tab-content']/div/span/button[@type='submit']")
-	WebElement btnSave ;
+	WebElementFacade btnSave ;
 	
 	@FindBy(id="preview-toggle")
-	WebElement btnHistory ;
+	WebElementFacade btnHistory ;
 	
 	@FindBy(xpath="//div[@id='preview']/div[@class='mt-comments']/div[@class='mt-comment border-bottom-grey padding-bottom-20 margin-0'][last()]")
-	WebElement historyField ;
+	WebElementFacade historyField ;
 	
 	@FindBy(id="edit_trip_offer_customer_payment_cost")
-	WebElement customer_payment_cost_field ;
+	WebElementFacade customer_payment_cost_field ;
 	
 	@FindBy(xpath="//input[@id='edit_trip_offer_cashback_amount']")
-	WebElement affiliateField ;
+	WebElementFacade affiliateField ;
 	
 	@FindBy(id="edit_trip_offer_cashback_type")
-	WebElement cashbacktypeField;
+	WebElementFacade cashbacktypeField;
 	
 	@FindBy(id="edit_trip_offer_free_nights_percent")
-	WebElement freenightField;
+	WebElementFacade freenightField;
 	
 	@FindBy(id="edit_trip_offer_price_amount")
-	WebElement grossField ;
+	WebElementFacade grossField ;
 	
 	@FindBy(id="edit_trip_offer_price_tax_amount")
-	WebElement includedtaxField ;
+	WebElementFacade includedtaxField ;
 	
 	@FindBy(id="edit_trip_offer_free_nights_used")
-	WebElement freenightusedField ;
+	WebElementFacade freenightusedField ;
 	
 	@FindBy(id="edit_trip_offer_customer_payment_price_in_eur")
-	WebElement gross_payment_field ;
+	WebElementFacade gross_payment_field ;
 	
 	@FindBy(id="edit_trip_offer_dc_profit")
-	WebElement dc_profit_field ;
+	public WebElementFacade dc_profit_field ;
 	
 	@FindBy(id="edit_trip_offer_dc_margin")
-	WebElement dc_margin_field ;
+	public WebElementFacade dc_margin_field ;
 	
 	@FindBy(id="edit_trip_offer_original_customer_price_in_eur")
-	WebElement initial_price_field ;
+	public WebElementFacade initial_price_field ;
 	
 	@FindBy(id="edit_trip_offer_cashback_currency")
-	WebElement cashback_option ;
+	WebElementFacade cashback_option ;
 	
 	@FindBy(id="edit_trip_offer_price_in_eur")
-	WebElement offer_price_in_eur ;
+	WebElementFacade offer_price_in_eur ;
 	
 	@FindBy(id="edit_trip_offer_price_tax_currency")
-	WebElement included_tax_option ;
+	WebElementFacade included_tax_option ;
 	
 	@FindBy(xpath="//div/a[@class='btn btn-default']/i[@class='fa fa-plus']")
-	WebElement btn_create_offer ;
+	WebElementFacade btn_create_offer ;
 	
 	@FindBy(xpath="//div/div[@class='btn-group']/button[@class='btn btn-primary']")
-	WebElement btn_SendOffer;
+	WebElementFacade btn_SendOffer;
 	
 	@FindBy(id="edit_trip_offer_saving")
-	WebElement field_saving;
+	WebElementFacade field_saving;
+	
+	@FindBy(xpath="//a[@class='btn btn-default']/i[@class='icon-paper-plane']")
+	public WebElementFacade btn_rebook;
+	
+	@FindBy(id="edit_trip_offer_payment_date")
+	public WebElementFacade field_DC_payment_date;
+	
+	@FindBy(id="edit_trip_offer_payment_method")
+	public WebElementFacade field_DC_payment_method;
+	
+	@FindBy(id="edit_trip_trip_id")
+	public WebElementFacade field_tripID;
+	
+	@FindBy(id="edit_trip_offer_original_customer_price_in_eur")
+	public WebElementFacade ed_initialPriceinEur_field;
+	
+	@FindBy(id="edit_trip_offer_customer_payment_cost")
+	public WebElementFacade ed_paymentCostinEur_field;
+	
+	@FindBy(id="edit_trip_state")
+	public WebElementFacade field_trip_state;
+	
+	@FindBy(id="edit_trip_offer_saving_in_eur")
+	public WebElementFacade ed_savinginEur_field;
+	
+	@FindBy(id="edit_trip_offer_customer_payment_price_amount")
+	public WebElementFacade ed_ammountCharged_field;
+	
+	@FindBy(id="edit_trip_offer_customer_payment_price_in_eur")
+	public WebElementFacade ed_grossPaymentinEur_field;
+	
+	@FindBy(id="edit_trip_offer_price_in_eur")
+	public WebElementFacade ed_grossCostDC_field;
+	
+	
+	
+	
 	
 	public void open_edit_trip_page() {
 		
@@ -147,7 +193,7 @@ public class EditTripPage extends PageObject {
 	}
 	public float get_dc_purchase_price_in_eur()
 	{
-		float dc_purchase_price_in_eur = 0  ;
+		float dc_purchase_price_in_eur = 0.0f  ;
 		if (dc_purchase_price_currency_field.getAttribute("value") == "EUR")
 		{
 			dc_purchase_price_in_eur = Float.parseFloat(grossField.getAttribute("value"));
@@ -161,7 +207,7 @@ public class EditTripPage extends PageObject {
 	
 	public float get_included_tax()
 	{
-		float included_tax_in_eur = 0  ;
+		float included_tax_in_eur = 0.0f  ;
 		float gross = get_dc_purchase_price_in_eur();
 		
 		if (included_tax_option.getAttribute("value") == "#")
@@ -181,15 +227,15 @@ public class EditTripPage extends PageObject {
 		 float gross_cost = get_dc_purchase_price_in_eur() ;
 		 float included_tax = get_included_tax() ;
 		 float freenight_used = Float.parseFloat(freenightusedField.getAttribute("value")) ;
-		 float Affiliate_earnings = 0 ;
+		 float Affiliate_earnings = 0.0f ;
 		
-		if (cashback_option.getAttribute("value") == "#")
+		if (cashback_option.getAttribute("value").equals("#"))
 			{
 				Affiliate_earnings = Affiliate;
 			}
 		else
 		{
-			if (cashbacktypeField.getAttribute("value") == "pre-tax")
+			if (cashbacktypeField.getAttribute("value").equals("pre-tax"))
 			{
 				Affiliate_earnings = (Affiliate + freenight)/100*(gross_cost - included_tax - freenight_used) ;
 			}
@@ -207,7 +253,7 @@ public class EditTripPage extends PageObject {
 		return mark_up_in_Eur;
 	}
 
-	public float check_profit_after_all() {
+	public float calculate_profit_after_all() {
 		float gross = get_dc_purchase_price_in_eur();
 		float gross_payment = Float.parseFloat(gross_payment_field.getAttribute("value")) ;
 		float affiliate_earnings = see_a_correct_Affiliate_earnings();
@@ -220,20 +266,86 @@ public class EditTripPage extends PageObject {
 	}
 	
 	public void check_profit_margin() {
-		float profit_margin = check_profit_after_all()/Float.parseFloat(initial_price_field.getAttribute("value"))*100 ;
+		float profit_margin = calculate_profit_after_all()/Float.parseFloat(initial_price_field.getAttribute("value"))*100 ;
 		float y = (float) (Math.round(profit_margin*100.00)/100.00) ;
 		float dc_margin = Float.parseFloat(dc_margin_field.getAttribute("value"));
 		Assert.assertEquals(y, dc_margin, 0.01f);
 	}
 
 	public void send_offer_to_customer() {
+		waitForState("Options search done");
 		btn_create_offer.click();
+		waitABit(2000);
 		btn_SendOffer.click();
+		waitABit(2000);
 	}
 
 	public  List<EditTripPage> getPayments() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public String get_data_from_text_field(String fieldName)
+	{
+		waitABit(5000);
+		String value = null ;
+					switch (fieldName)
+					{
+					case "ed_dcProfit": value =  dc_profit_field.getValue(); 
+					return value;
+					case "ed_dcMargin": value = dc_margin_field.getValue() ;
+					return value;
+					case "ed_initialPriceinEur": value = ed_initialPriceinEur_field.getValue();
+					return value;
+					
+					case "ed_savinginEur": value =  ed_savinginEur_field.getValue(); 
+					return value;
+					case "ed_ammountCharged": value =  ed_ammountCharged_field.getValue(); 
+					return value;
+					case "ed_grossPaymentinEur": value =  ed_grossPaymentinEur_field.getValue(); 
+					return value;
+					case "ed_grossCostDC": value =  ed_grossCostDC_field.getValue(); 
+					return value;
+					case "ed_paymentCostinEur": value =  ed_paymentCostinEur_field.getValue(); 
+					return value;
+					
+					}
+		return "-" ;
+	}
+	
+	public void scrollToElement(WebElement element ) {
+		  evaluateJavascript("arguments[0].scrollIntoView(true);", element);
+		}
+	
+	public void scrollTo(int x, int y) {
+		  evaluateJavascript("window.scrollTo("+x+", "+y+");");
+		}
+	
+	public void rebook_trip(String tripID) {
+		if (field_tripID.getText().equalsIgnoreCase(tripID))
+		{
+		if (btn_rebook.isDisplayed())
+		{
+			field_DC_payment_date.type("2017/Dec/25");
+			waitABit(2000);
+			field_DC_payment_method.selectByIndex(1);
+			waitABit(2000);
+			scrollTo(70, 7);
+			//scrollToElement(btn_rebook);
+			
+			btn_rebook.click();
+			waitABit(5000);
+		}
+		else
+		{
+			System.out.println("Trip cannot be rebooked.");
+		}
+		}
+		
+	}
+
+	public void waitForState(String tripState) {
+		WebDriverWait wait = new WebDriverWait(getDriver(),300);
+		wait.until(ExpectedConditions.textToBePresentInElement(field_trip_state, tripState));
 	}
 
 	

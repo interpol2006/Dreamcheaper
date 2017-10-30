@@ -14,16 +14,18 @@ public class AcceptOfferSteps extends ScenarioSteps {
 	AcceptOfferPage acceptOfferPage ;
 	@Step
 	public void user_accept_offer() {
+		
+		waitABit(2000);
 		acceptOfferPage.user_accept_offer();
 	}
 	
-	
-	
 	@Step
-	public void user_check_saving() {
-		acceptOfferPage.user_check_saving();
-		
+	public void user_check_out() {
+		acceptOfferPage.check_out();
 	}
+	
+	
+
 	
 	@Step
 	public void user_check_total_amount(String payment_method) {
@@ -104,6 +106,18 @@ public class AcceptOfferSteps extends ScenarioSteps {
 	public void i_need_print_out_saving_to_report(){
 	    float s = acceptOfferPage.calculate_saving();
 	    my_system_print_out(s);
+	}
+	
+	@Step
+	public void user_click_on_btn_Pay_Save_Enjoy() {
+		acceptOfferPage.user_click_on_btn_Pay_Save_enjoy();
+		
+	}
+	
+	@Step
+	public void user_accept_offer_of_trip(String tripID) {
+		acceptOfferPage.user_accept_offer_of_trip(tripID);
+		
 	}
 	
 	

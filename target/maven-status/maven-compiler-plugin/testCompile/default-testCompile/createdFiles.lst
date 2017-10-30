@@ -1,0 +1,16 @@
+dreamcheaper/pages/PaymentPage.class
+dreamcheaper/pages/AcceptOfferPage.class
+dreamcheaper/pages/UserPage.class
+dreamcheaper/steps/serenity/AccountingSheetSteps.class
+dreamcheaper/models/Accounting.class
+dreamcheaper/pages/OfferPage.class
+dreamcheaper/steps/serenity/AcceptOfferSteps.class
+dreamcheaper/EditTripScenarioSteps.class
+dreamcheaper/AccountingSheetScenarioSteps.class
+dreamcheaper/pages/EditTripPage.class
+dreamcheaper/CreateTripScenarioSteps.class
+dreamcheaper/steps/serenity/EditTripSteps.class
+dreamcheaper/steps/serenity/UserSteps.class
+dreamcheaper/DefinitionTestSuite.class
+dreamcheaper/AcceptOfferScenarioSteps.class
+dreamcheaper/pages/AccountingSheetPage.class

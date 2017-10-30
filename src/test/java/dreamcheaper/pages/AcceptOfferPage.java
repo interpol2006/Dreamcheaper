@@ -1,6 +1,7 @@
 package dreamcheaper.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import org.junit.Assert;
@@ -13,57 +14,58 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
-@DefaultUrl("http://stage2.dreamcheaper.review")
+@DefaultUrl("http://stage2.dreamcheaper.review/bookings")
 public class AcceptOfferPage extends PageObject {
 	
 	EditTripPage editPage;
 	
 	@FindBy(xpath="//div//a[@href='/login']")
-	WebElement btn_Login;
+	WebElementFacade btn_Login;
 	
 	@FindBy(xpath="//div/input[@type='email']")
-	WebElement field_customername;
+	WebElementFacade field_customername;
 	
 	@FindBy(xpath="//div/input[@type='password']")
-	WebElement field_customerpassword;
+	WebElementFacade field_customerpassword;
 	
 	@FindBy(xpath="//div/button[@type='submit']")
-	WebElement btn_clicktologin;
-	@FindBy(xpath="//span[text()='Confirm your saving']")
-	WebElement btn_ConfirmYourSaving;
+	WebElementFacade btn_clicktologin;
+	@FindBy(xpath="//button[text()='Confirm your saving']")
+	WebElementFacade btn_ConfirmYourSaving;
 	
-	@FindBy(xpath="//span[text()='Proceed to checkout']")
-	WebElement btn_ProceedToCheckout;
+	@FindBy(xpath="//button[text()='Proceed to checkout']")
+	public WebElementFacade btn_ProceedToCheckout;
 	
-	@FindBy(xpath="//span[text()='Pay now']")
-	WebElement option_PayNow ;
+	@FindBy(xpath="//div[text()='Pay now']")
+	WebElementFacade option_PayNow ;
 	
 	@FindBy(xpath="//div[@class='RadioCards_cardItem_29ybl']/div/input[@type='radio']")
 	WebElementFacade option_PayLater ;
 	
 	@FindBy(xpath="//button[text()='Pay. Save. Enjoy.']")
-	WebElement btn_Pay_Save_Enjoy;
+	WebElementFacade btn_Pay_Save_Enjoy;
 	
 	@FindBy(xpath="//div[@class='TripPriceListing_highlightedRow_1s7PU']/span[@class='TripPriceListing_figureAmount_39ggd']")
-	WebElement field_Savings ;
+	WebElementFacade field_Savings ;
 	
-	@FindBy(xpath="//div[@class='Payment_offerPriceListingContainer_39CzT']/div[2]/div[2]/span[2]")
-	WebElement field_saving_accept_page ;
+	
+	@FindBy(xpath="//div[@class='Payment_offerPriceListingContainer_TGwKt']/div[2]/div[2]/span[2]")
+	WebElementFacade field_saving_accept_page ;
 	
 	@FindBy(xpath="//div[@class='Payment_offerPriceListingContainer_39CzT']/div[3]/div[1]/span[2]")
-	WebElement field_hotel_price_accept_page ;
+	WebElementFacade field_hotel_price_accept_page ;
 	
 	@FindBy(xpath="//div[@class='Payment_offerPriceListingContainer_39CzT']/div[3]/div[2]/span[2]")
-	WebElement field_service_fee_accept_page ;
+	WebElementFacade field_service_fee_accept_page ;
 	
 	@FindBy(xpath="//div[@class='Payment_highlightedPriceListingRow_2ExYP']/span[2]")
-	public WebElement field_total_pay_now_accept_page ;
+	public WebElementFacade field_total_pay_now_accept_page ;
 	
 	@FindBy(xpath="//div[@class='Payment_priceListingSection_2h2k9']/div[3]/span[2]")
-	WebElement field_pay_later_fee ;
+	WebElementFacade field_pay_later_fee ;
 	
 	@FindBy(xpath="//div[@class='Payment_highlightedPriceListingRow_2ExYP']/span[2]")
-	WebElement field_total_pay_later_fee_accept_page ;
+	WebElementFacade field_total_pay_later_fee_accept_page ;
 	
 	@FindBy(xpath="//div[@class='Grid_col-align-top_63YvX Grid_col-xs-6_1wwsn Grid_col-md-3_d6XMV Grid_col-lg-2_Ao39H']/div[@class='Select_select_3IMrR Select_select--dark_3E5_Q']/input[@class='Select_selectInput_-41Fz']")
 	WebElementFacade option_currency ;
@@ -86,32 +88,41 @@ public class AcceptOfferPage extends PageObject {
 	@FindBy(xpath="//div[@class='Offer_offerPreviewBox_161pa']/div[@class='TripPriceListing_TripPriceListing_15PeM']/div[1]/span[2]/span")
 	WebElementFacade field_saving_price;
 	
+	@FindBy(xpath="//button[@class='Button_Button_2ph2o Button_button--layout-call-to-action_-ud48']")
+	WebElementFacade btn_pay_save_enjoy ;
+	
+	
 	public void user_login_page()
 	{
-		getDriver().navigate().to("http://stage2.dreamcheaper.review/");
+		
 		btn_Login.click();
-		field_customername.sendKeys("tri50@yahoo.com");
+		field_customername.sendKeys("tri60@gmail.com");
 		field_customerpassword.sendKeys("1234");
 		btn_clicktologin.click();
 		
 	}
 	
+	public void user_login_page_with_email(String email_address)
+	{
+		
+		waitABit(2000);
+		btn_Login.click();
+		field_customername.sendKeys(email_address);
+		field_customerpassword.sendKeys("1234");
+		btn_clicktologin.click();
+		waitABit(3000);
+	}
 	public void user_accept_offer() {
-		user_login_page();
+
+		((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", btn_ConfirmYourSaving);
 		btn_ConfirmYourSaving.click();
 		btn_ProceedToCheckout.click();
+		
 	}
 
 	
 
-	public void user_check_saving()
-	{
-		float saving = Float.parseFloat(field_Savings.getText().replaceAll("[-CA$€SGD]","")) ;
-		//editPage.l
-//		String admin_saving = editPage.field_saving.getAttribute("value");
-//		Assert.assertEquals(customer_saving, admin_saving, 0.01f);
-//		assertThat(customer_saving, equalTo("€"+admin_saving));
-	}
+
 	
 	public void user_check_payment() {
 		
@@ -123,7 +134,7 @@ public class AcceptOfferPage extends PageObject {
 		float new_hotel_price = get_price_from_text(field_hotel_price_accept_page);		
 		float service_fee = get_price_from_text(field_service_fee_accept_page);	
 			
-		WebElement credit_field = getDriver().findElement(By.xpath("//div[@class='Payment_priceListingSection_2h2k9']/div[3]/span[1]"));
+		WebElement credit_field = getDriver().findElement(By.xpath("//div[@class='Payment_priceListingSection_3L-1V']/div[3]/span[1]"));
 		String s = credit_field.getText();
 		if (s.contains("Credits"))
 		{
@@ -143,7 +154,7 @@ public class AcceptOfferPage extends PageObject {
 		float y = calculate_pay_now_fee();
 		float total_pay_now = get_price_from_text(field_total_pay_now_accept_page);	
 		Assert.assertEquals(y, total_pay_now, 0.00f);
-		//btn_Pay_Save_Enjoy.click();
+		
 		}
 
 	
@@ -203,25 +214,26 @@ public class AcceptOfferPage extends PageObject {
 	public void user_choose_option_pay_now() {
 		option_PayNow.click();
 		
+		
 	}
-
+	
+	public void user_click_on_btn_Pay_Save_enjoy()
+	{
+		waitABit(1000);
+		
+		btn_Pay_Save_Enjoy.click();
+	}
+	
 	public void change_user_currency(String str_currency) {
 		option_currency.click();
-//		 List<WebElement> options = getDriver().findElements(By.xpath("//div[@class='Grid_col-align-top_63YvX Grid_col-xs-6_1wwsn Grid_col-md-3_d6XMV Grid_col-lg-2_Ao39H']/div[@class='Select_select_3IMrR Select_select--dark_3E5_Q']/div[@class='Select_selectList_3xPCP']/ul/li"));
-//	        // Loop through the options and select the one that matches
-//	        for (WebElement opt : options) {
-//	            if (opt.getAttribute("data-value").equals(str_currency)) {
-//	                opt.click();
-//	                return;
-//	            }
-//	}
-		WebElement currency = getDriver().findElement(By.xpath("//div[@class='Select_selectList_3xPCP']/ul/li[@data-value='"+str_currency+"']"));
+
+		WebElement currency = getDriver().findElement(By.xpath("//div[@class='Select_selectList_1uc9p']/ul/li[@data-value='"+str_currency+"']"));
         currency.click();
 
 	}
 
 	public void user_choose_option_pay_now_with_credits() {
-		
+		button_continue_offer_page.click();
 		
 	}
 
@@ -259,6 +271,63 @@ public class AcceptOfferPage extends PageObject {
 		
 		
 	}
+
+	public void check_out() {
+		if (btn_pay_save_enjoy.isDisplayed())
+		{
+			btn_pay_save_enjoy.click();
+		}
+//		if (button_continue_offer_page.isDisplayed())
+//		{
+//			button_continue_offer_page.click();
+//		}
+		
+	}
+
+	public void user_accept_offer_of_trip(String tripID) {
+		waitABit(5000);
+		
+		List<WebElement> rows_table=getDriver().findElements(By.className("TripListItem_TripListItem_2MMTM")) ;
+		
+		int rows_count = rows_table.size();
+			for (int row = 0; row < rows_count ; row++)
+			{
+				String a = rows_table.get(row).getAttribute("data-trip");
+				if (a.equals(tripID))
+				{
+					int b = row + 1 ;
+					getDriver().findElement(By.xpath("//div/a[@class='TripListItem_TripListItem_2MMTM'][" + b + "]")).click();
+					waitABit(2000);
+//					if(btn_ProceedToCheckout.isDisplayed())
+//					{
+//					btn_ProceedToCheckout.click();
+//					waitABit(2000);
+//					btn_Pay_Save_Enjoy.click();
+//					}
+//					if (button_continue_offer_page.isDisplayed())
+//					{
+//						button_continue_offer_page.click();
+//						waitABit(2000);
+//					}
+					break ;
+				//	
+//					getDriver().findElement(By.xpath("//button[text()='Proceed to checkout']")).click();
+					
+//					waitABit(1000);
+//					getDriver().findElement(By.xpath("//button[text()='Pay. Save. Enjoy.']")).click();
+					//
+//					waitABit(1000);
+					//btn_ConfirmYourSaving.click();
+					
+				}
+				
+			}
+			
+	}
+	
+	
+	
+	
 }
 
 	

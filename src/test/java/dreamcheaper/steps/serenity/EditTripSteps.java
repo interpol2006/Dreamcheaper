@@ -77,9 +77,12 @@ public class EditTripSteps extends ScenarioSteps {
 
 	@Step
 	public void check_profit_after_all() {
-		editTripPage.check_profit_after_all();
+		editTripPage.calculate_profit_after_all();
+		float s = editTripPage.calculate_profit_after_all();
+		
+				
 	}
-
+	
 	@Step
 	public void check_profit_margin() {
 		editTripPage.check_profit_margin();
@@ -89,5 +92,14 @@ public class EditTripSteps extends ScenarioSteps {
 	@Step
 	public void send_offer_to_customer() {
 		editTripPage.send_offer_to_customer();
+	}
+
+	@Step
+	public void admin_rebook(String tripID) {
+		
+		//editTripPage.find_a_booking(tripID);
+		editTripPage.btn_rebook.waitUntilPresent();
+		editTripPage.clickOn(editTripPage.btn_rebook);
+		
 	}
 }

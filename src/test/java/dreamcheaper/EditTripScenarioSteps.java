@@ -18,7 +18,8 @@ public class EditTripScenarioSteps {
 	public void user_is_on_edit_trip_page() throws Throwable {
 	    editTripStep.open_edit_trip_page();
 	}
-
+	
+	
 	@Given("^I have a trip \"([^\"]*)\"$")
 	public void i_have_a_booking_to_cancel(String tripID) throws Throwable {
 	    editTripStep.find_a_booking(tripID);
@@ -28,6 +29,7 @@ public class EditTripScenarioSteps {
 	public void i_click_on_tab_Booking_No() throws Throwable {
 	    editTripStep.click_on_tab_booking_no();
 	}
+	
 	
 	@When("^I choose option 'I cancelled'$")
 	public void i_choose_option_I_cancelled() throws Throwable {
